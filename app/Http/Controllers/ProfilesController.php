@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Suport\Facades\Storage;
+use Illuminate\Support\Facades\Storage;
  
 
 use Auth;
@@ -147,7 +147,7 @@ class ProfilesController extends Controller
             'description' => 'required',  
         ]);
 
-        $profile = new Profile;
+        $profile =  Profile::find($id);
         
         if($request->hasFile('picture')){
 
@@ -178,7 +178,7 @@ class ProfilesController extends Controller
 
             $profile->file = $fileNameToStore;
         }
-         
+
         $profile->name = $request->input('name');
         $profile->last_name = $request->input('last_name'); 
         $profile->description = $request->input('description'); 
@@ -198,6 +198,7 @@ class ProfilesController extends Controller
     
     public function destroy($id)
     {
+        $profile =  Profile::find($id);
         //Delet Files
         Storage::delete('public/files/'.$profile->file);
         Storage::delete('public/pictures/'.$profile->picture);

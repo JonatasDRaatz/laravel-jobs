@@ -29,6 +29,7 @@
                          @endforeach
                     </table>
                 </div>
+                {{$jobs->links()}}
             @else
                 <p>No momento nao temos nenhuma oportunidade disponível!</p> 
             @endif 
